@@ -65,7 +65,7 @@ class ApiControllerTest extends WebTestCase
         $this->assertArrayHasKey('lang', $data);
         $this->assertNotEmpty($data['lang']);
 
-        $this->assertFileExists($dir.'/var/log/test.log');
+        $this->assertFileExists($dir.'/var/log/my-info.log');
     }
 
     public function testProduct(): void
