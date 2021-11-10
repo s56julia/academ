@@ -38,8 +38,16 @@ services:
         resource: '../src/Controller/'
         tags: [ 'controller.service_arguments' ]
 
+    App\EventListener\ApiControllerListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request }
+
 when@test:
     services:
         test.user_password_hasher:
             alias: 'security.user_password_hasher'
             public: true
+
+
+
+

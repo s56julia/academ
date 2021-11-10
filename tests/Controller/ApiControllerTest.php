@@ -21,7 +21,7 @@ class ApiControllerTest extends WebTestCase
     public function testIndex(): void
     {
         $client = static::createClient();
-        $client->jsonRequest('GET', '/api/');
+        $client->jsonRequest('GET', '/en/api/');
 
         $this->assertResponseIsSuccessful();
 
@@ -38,7 +38,7 @@ class ApiControllerTest extends WebTestCase
     public function testIndexNonJsonRequest(): void
     {
         $client = static::createClient();
-        $client->request('GET', '/api/');
+        $client->request('GET', '/en/api/');
 
         $this->assertResponseStatusCodeSame(415);
     }
@@ -50,7 +50,7 @@ class ApiControllerTest extends WebTestCase
         $dir = $this->getContainer()->getParameter('kernel.project_dir');
         @unlink($dir.'/var/log/my-info.log');
 
-        $client->jsonRequest('GET', '/api/my-info');
+        $client->jsonRequest('GET', '/en/api/my-info');
 
         $this->assertResponseIsSuccessful();
 
@@ -71,7 +71,7 @@ class ApiControllerTest extends WebTestCase
     public function testProduct(): void
     {
         $client = static::createClient();
-        $client->jsonRequest('GET', '/api/product_001');
+        $client->jsonRequest('GET', '/en/api/product_001');
         $this->assertResponseIsSuccessful();
 
         $data = json_decode($client->getResponse()->getContent(), \JSON_OBJECT_AS_ARRAY);
@@ -82,11 +82,25 @@ class ApiControllerTest extends WebTestCase
         $this->assertArrayHasKey('description', $data);
         $this->assertSame('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do', $data['description']);
     }
+    public function testProductRu(): void
+    {
+        $client = static::createClient();
+        $client->jsonRequest('GET', '/ru/api/product_001');
+        $this->assertResponseIsSuccessful();
+
+        $data = json_decode($client->getResponse()->getContent(), \JSON_OBJECT_AS_ARRAY);
+        $this->assertArrayHasKey('артикул', $data);
+        $this->assertSame('product_001', $data['артикул']);
+        $this->assertArrayHasKey('имя', $data);
+        $this->assertSame('apple', $data['имя']);
+        $this->assertArrayHasKey('описание', $data);
+        $this->assertSame('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do', $data['описание']);
+    }
 
     public function testProductNotEmpty(): void
     {
         $client = static::createClient();
-        $client->jsonRequest('GET', '/api/product_0111');
+        $client->jsonRequest('GET', '/en/api/product_0111');
         $this->assertResponseStatusCodeSame(404);
     }
 }

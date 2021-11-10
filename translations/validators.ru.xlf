@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2021-11-10T18:54:42Z" source-language="en" target-language="ru" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="92c5b0630ae8fdb18b77147e9b7b0b64bb6dd4ac" resname="comment.blank">
+        <source>comment.blank</source>
+        <target>Пожалуйста, не оставляйте текст комментария пустым!</target>
+      </trans-unit>
+      <trans-unit id="f73c2759a18cc719e2100bc0edc54ef58c23d665" resname="comment.is_spam">
+        <source>comment.is_spam</source>
+        <target>Содержание этого комментария было расценено как спам.</target>
+      </trans-unit>
+      <trans-unit id="3e6f631d22ce9628c039a4b85a4b0181d2474ff7" resname="comment.too_long">
+        <source>comment.too_long</source>
+        <target>Комментарий слишком длинный, (максимум { limit } символов).</target>
+      </trans-unit>
+      <trans-unit id="ee1f8854d871a1f859c133045e2d86ea04f953c8" resname="comment.too_short">
+        <source>comment.too_short</source>
+        <target>Комментарий слишком короткий, (минимум { limit } символов).</target>
+      </trans-unit>
+      <trans-unit id="7772798f78784ab857231f39966147cc4259c0e2" resname="post.blank_content">
+        <source>post.blank_content</source>
+        <target>Ваша запись должна содержать хоть какое-то содержание!</target>
+      </trans-unit>
+      <trans-unit id="5a9450aca3affc93eef52e946c71ef0d57960883" resname="post.blank_summary">
+        <source>post.blank_summary</source>
+        <target>Введите краткое содержание вашей записи!</target>
+      </trans-unit>
+      <trans-unit id="c2e0d5ce438c60cf8f1fdc627b0f48fb332e61b3" resname="post.slug_unique">
+        <source>post.slug_unique</source>
+        <target>Такой заголовок уже используется в другой записи в блоге. Пожалуйста, используйте уникальный заголовок.</target>
+      </trans-unit>
+      <trans-unit id="6ceee83456db320f5b4df87057451c1266492746" resname="post.too_many_tags">
+        <source>post.too_many_tags</source>
+        <target>Слишком много тегов (добавьте { limit } тегов или меньше)</target>
+      </trans-unit>
+      <trans-unit id="beafcd4de161d18b1d02a7b4f153dc2423077393" resname="post.too_short_content">
+        <source>post.too_short_content</source>
+        <target>Содержание записи слишком короткое (минимум { limit } символов).</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

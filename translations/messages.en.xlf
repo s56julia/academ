@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2021-11-10T18:55:37Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="ef98362b8a6b0c8cd804b0d227aa1ffeaba89786" resname="browser">
+        <source>browser</source>
+        <target>browser</target>
+      </trans-unit>
+      <trans-unit id="cb329146a0dd0d566b0628744d67936558741ffa" resname="description">
+        <source>description</source>
+        <target>description</target>
+      </trans-unit>
+      <trans-unit id="f9aba3f1299b4a48e75ee40ef3baf522152a817c" resname="ip">
+        <source>ip</source>
+        <target>ip</target>
+      </trans-unit>
+      <trans-unit id="9436708004f723d02431155c0fc3f20be9b02005" resname="label.content">
+        <source>label.content</source>
+        <target>Content</target>
+      </trans-unit>
+      <trans-unit id="cc43a781180eece11d85cbbc772ea28d2d8f3426" resname="label.current_password">
+        <source>label.current_password</source>
+        <target>Current password</target>
+      </trans-unit>
+      <trans-unit id="fc8413fdfd53e23e0f6ad278406aa827b4548642" resname="label.email">
+        <source>label.email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="680824c7f7b722e1a23f54849817f910fd5ade1c" resname="label.fullname">
+        <source>label.fullname</source>
+        <target>Fullname</target>
+      </trans-unit>
+      <trans-unit id="5246d23327930565f67049f86d1d8dac171ad9bf" resname="label.new_password">
+        <source>label.new_password</source>
+        <target>New password</target>
+      </trans-unit>
+      <trans-unit id="5db72d71e224c4d01d7b85f4af932d90cb301ffe" resname="label.new_password_confirm">
+        <source>label.new_password_confirm</source>
+        <target>Confirm password</target>
+      </trans-unit>
+      <trans-unit id="877a7d78de65f557f5f795a0f92382752b5a62b5" resname="label.published_at">
+        <source>label.published_at</source>
+        <target>Published at</target>
+      </trans-unit>
+      <trans-unit id="d796c7821914c571619d60cd6f3c06192578d6e3" resname="label.summary">
+        <source>label.summary</source>
+        <target>Summary</target>
+      </trans-unit>
+      <trans-unit id="78cdcc0b0b913c9fb8320b36162c9805fc654eb5" resname="label.tags">
+        <source>label.tags</source>
+        <target>Tags</target>
+      </trans-unit>
+      <trans-unit id="2950e98e4e3fa271eb4e201c9fdb670a770e927f" resname="label.title">
+        <source>label.title</source>
+        <target>Title</target>
+      </trans-unit>
+      <trans-unit id="05353914133c4c4be543a454c6da7e36249a974a" resname="label.username">
+        <source>label.username</source>
+        <target>Username</target>
+      </trans-unit>
+      <trans-unit id="7a2f85497548f3db88542025e6f75908b8716c12" resname="lang">
+        <source>lang</source>
+        <target>lang</target>
+      </trans-unit>
+      <trans-unit id="6ae999552a0d2dca14d62e2bc8b764d377b1dd6c" resname="name">
+        <source>name</source>
+        <target>name</target>
+      </trans-unit>
+      <trans-unit id="bea02d0744e4c52a0db301f1b4f9f0f616e5946b" resname="notification.comment_created">
+        <source>notification.comment_created</source>
+        <target>Your post received a comment!</target>
+      </trans-unit>
+      <trans-unit id="140199f7421a99aa76b7099d89aea2635cac8333" resname="notification.comment_created.description">
+        <source>notification.comment_created.description</source>
+        <target><![CDATA[Your post "{title}" has received a new comment. You can read the comment by following <a href="{link}">this link</a>]]></target>
+      </trans-unit>
+      <trans-unit id="cf559ae3526e08d2bf8526eb199d6a7115abe2d2" resname="sku">
+        <source>sku</source>
+        <target>sku</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
