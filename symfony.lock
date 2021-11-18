@@ -118,6 +118,9 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
     },
+    "jms/translation-bundle": {
+        "version": "1.6.0"
+    },
     "laminas/laminas-code": {
         "version": "3.4.1"
     },
@@ -474,9 +477,6 @@
             "config/packages/twig.yaml",
             "templates/base.html.twig"
         ]
-    },
-    "symfony/twig-pack": {
-        "version": "v1.0.1"
     },
     "symfony/validator": {
         "version": "4.3",
