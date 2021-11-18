@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Notification\NotificationChannelRegistry;
+use App\Notification\UnknownChannelException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +26,26 @@ class ApiController
         }
 
         return new JsonResponse($urls);
+    }
+
+    #[Route('/notify', name: 'notify', methods: ['POST'])]
+    public function notify(Request $request, NotificationChannelRegistry $channelRegistry): Response
+    {
+        $recipient = $request->request->get('recipient');
+        $message = $request->request->get('message');
+        $channel = $request->request->get('channel');
+
+        try {
+            $transport = $channelRegistry->getNotificationTransportByChannel($channel);
+        } catch (UnknownChannelException $e) {
+            return new Response(null, Response::HTTP_NOT_FOUND);
+        }
+
+        if (!$transport->send($recipient, $message)) {
+            return new Response(null, Response::HTTP_I_AM_A_TEAPOT);
+        }
+
+        return new Response(null, Response::HTTP_NO_CONTENT);
     }
 
     #[Route('/my-info', name: 'my_info', priority: 10)]
