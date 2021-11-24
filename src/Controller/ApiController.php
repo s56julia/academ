@@ -29,11 +29,16 @@ class ApiController
     }
 
     #[Route('/notify', name: 'notify', methods: ['POST'])]
+
     public function notify(Request $request, NotificationChannelRegistry $channelRegistry): Response
     {
         $recipient = $request->request->get('recipient');
         $message = $request->request->get('message');
         $channel = $request->request->get('channel');
+
+        if(empty($channel)) {
+            throw new NotFoundHttpException('Channel is required');
+        }
 
         try {
             $transport = $channelRegistry->getNotificationTransportByChannel($channel);

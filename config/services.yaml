@@ -61,6 +61,10 @@ services:
         arguments:
             [!tagged_iterator { tag: 'notification.channel', index_by: 'key' }]
 
+    App\Routing\UrlGeneratorDecorator:
+        class: App\Routing\UrlGeneratorDecorator
+        decorates: Symfony\Component\Routing\Generator\UrlGeneratorInterface
+        arguments: ['@App\Routing\UrlGeneratorDecorator.inner']
 
 when@test:
     services:
