@@ -76,19 +76,25 @@ services:
         class: App\Command\ConsoleCommandChaining\CommandFooHello
         tags:
             - { name: 'console.command' }
-            #- { name: 'app.chain.command', key: 'commandhello'}
 
     App\Command\ConsoleCommandChaining\CommandBar:
         class: App\Command\ConsoleCommandChaining\CommandBar
         tags:
             - { name: 'console.command' }
-            #- { name: 'app.chain.command', key: 'commandbar'}  
             
     App\Command\ConsoleCommandChaining\ConsoleCommandChaining:
+        decorates: App\Command\ConsoleCommandChaining\CommandFooHello
         class: App\Command\ConsoleCommandChaining\ConsoleCommandChaining
-        arguments: ['foo:hello', ['bar:hi']]
+        arguments: ['@App\Command\ConsoleCommandChaining\ConsoleCommandChaining.inner', ['bar:hi']]
         tags:
-            - { name: 'console.command' }   
+            - { name: 'console.command'} 
+            
+    App\Command\ConsoleCommandChaining\DecoratedChildcommand:
+        decorates: App\Command\ConsoleCommandChaining\CommandBar
+        class: App\Command\ConsoleCommandChaining\DecoratedChildcommand
+        arguments: ['@App\Command\ConsoleCommandChaining\DecoratedChildcommand.inner', 'foo:hello']
+        tags:
+            - { name: 'console.command'}                     
 
 when@test:
     services:
