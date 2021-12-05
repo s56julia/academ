@@ -1,11 +1,20 @@
 <?php
 
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Notification;
 
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Notifier\Notification\Notification;
 use Symfony\Component\Notifier\NotifierInterface;
 use Symfony\Component\Notifier\Recipient\Recipient;
-use Psr\Log\LoggerInterface;
 
 class TelegramNotificationChannel implements NotificationChannelInterface
 {
@@ -20,7 +29,7 @@ class TelegramNotificationChannel implements NotificationChannelInterface
 
     public function send(string $recipient, string $message): bool
     {
-        $message = 'To: ' . $recipient . '>> ' . $message;
+        $message = 'To: '.$recipient.'>> '.$message;
         $notification = new Notification($message, ['chat/telegram']);
         $recipient = new Recipient($recipient, $recipient);
 
