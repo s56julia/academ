@@ -1,31 +1,24 @@
 <?php
 
-/*
- * This file is part of the Symfony package.
- *
- * (c) Fabien Potencier <fabien@symfony.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace App\Notification;
+
+use Symfony\Component\DependencyInjection\ServiceLocator;
 
 class NotificationChannelRegistry
 {
-    private array $channels;
+    private ServiceLocator $channelsLocator;
 
-    public function __construct(iterable $channels)
+    public function __construct(ServiceLocator $channelsLocator)
     {
-        $this->channels = $channels instanceof \Traversable ? iterator_to_array($channels) : $channels;
+        $this->channelsLocator = $channelsLocator;
     }
 
     public function getNotificationTransportByChannel(string $channel): NotificationChannelInterface
     {
-        if (!isset($this->channels[$channel])) {
+        if (!$this->channelsLocator->has($channel)) {
             throw new UnknownChannelException('Unsupported channel requested');
         }
 
-        return $this->channels[$channel];
+        return $this->channelsLocator->get($channel);
     }
 }

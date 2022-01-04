@@ -59,7 +59,7 @@ services:
 
     App\Notification\NotificationChannelRegistry:
         arguments:
-            [!tagged_iterator { tag: 'notification.channel', index_by: 'key' }]
+            [!tagged_locator { tag: 'notification.channel', index_by: 'key' }]
 
     App\Routing\UrlGeneratorDecorator:
         class: App\Routing\UrlGeneratorDecorator
