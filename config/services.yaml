@@ -59,7 +59,7 @@ services:
 
     App\Notification\NotificationChannelRegistry:
         arguments:
-            [!tagged_iterator { tag: 'notification.channel', index_by: 'key' }]
+            [!tagged_locator { tag: 'notification.channel', index_by: 'key' }]
 
     App\Routing\UrlGeneratorDecorator:
         class: App\Routing\UrlGeneratorDecorator
@@ -70,7 +70,7 @@ services:
     App\Command\ConsoleCommandChaining\ConsoleCommandNotChaining:
         class: App\Command\ConsoleCommandChaining\ConsoleCommandNotChaining
         tags:
-            - { name: 'console.command' }  
+            - { name: 'console.command' }
 
     App\Command\ConsoleCommandChaining\CommandFooHello:
         class: App\Command\ConsoleCommandChaining\CommandFooHello
@@ -81,20 +81,20 @@ services:
         class: App\Command\ConsoleCommandChaining\CommandBar
         tags:
             - { name: 'console.command' }
-            
+
     App\Command\ConsoleCommandChaining\ConsoleCommandChaining:
         decorates: App\Command\ConsoleCommandChaining\CommandFooHello
         class: App\Command\ConsoleCommandChaining\ConsoleCommandChaining
-        arguments: ['@App\Command\ConsoleCommandChaining\ConsoleCommandChaining.inner', ['bar:hi']]
+        arguments: [ '@App\Command\ConsoleCommandChaining\ConsoleCommandChaining.inner', [ 'bar:hi' ] ]
         tags:
-            - { name: 'console.command'} 
-            
+            - { name: 'console.command' }
+
     App\Command\ConsoleCommandChaining\DecoratedChildcommand:
         decorates: App\Command\ConsoleCommandChaining\CommandBar
         class: App\Command\ConsoleCommandChaining\DecoratedChildcommand
-        arguments: ['@App\Command\ConsoleCommandChaining\DecoratedChildcommand.inner', 'foo:hello']
+        arguments: [ '@App\Command\ConsoleCommandChaining\DecoratedChildcommand.inner', 'foo:hello' ]
         tags:
-            - { name: 'console.command'}                     
+            - { name: 'console.command' }
 
 when@test:
     services:
