@@ -42,6 +42,30 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.request }
 
+    App\Notification\TelegramNotificationChannel:
+        class: App\Notification\TelegramNotificationChannel
+        tags:
+            - {name: 'notification.channel', key: 'telegram'}
+
+    App\Notification\EmailNotificationChannel:
+        class: App\Notification\EmailNotificationChannel
+        tags:
+            - {name: 'notification.channel', key: 'email'}
+
+    App\Notification\FileLoggerNotificationChannel:
+        class: App\Notification\FileLoggerNotificationChannel
+        tags:
+            - {name: 'notification.channel', key: 'logger'}
+
+    App\Notification\NotificationChannelRegistry:
+        arguments:
+            [!tagged_locator { tag: 'notification.channel', index_by: 'key' }]
+
+    App\Routing\UrlGeneratorDecorator:
+        class: App\Routing\UrlGeneratorDecorator
+        decorates: Symfony\Component\Routing\Generator\UrlGeneratorInterface
+        arguments: ['@App\Routing\UrlGeneratorDecorator.inner']
+
 when@test:
     services:
         test.user_password_hasher:

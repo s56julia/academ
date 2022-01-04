@@ -1,7 +1,18 @@
 <?php
 
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Controller;
 
+use App\Notification\NotificationChannelRegistry;
+use App\Notification\UnknownChannelException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,6 +37,30 @@ class ApiController
         return new JsonResponse($urls);
     }
 
+    #[Route('/notify', name: 'notify', methods: ['POST'])]
+    public function notify(Request $request, NotificationChannelRegistry $channelRegistry): Response
+    {
+        $recipient = $request->request->get('recipient');
+        $message = $request->request->get('message');
+        $channel = $request->request->get('channel');
+
+        if (empty($channel)) {
+            throw new NotFoundHttpException('Channel is required');
+        }
+
+        try {
+            $transport = $channelRegistry->getNotificationTransportByChannel($channel);
+        } catch (UnknownChannelException $e) {
+            return new Response(null, Response::HTTP_NOT_FOUND);
+        }
+
+        if (!$transport->send($recipient, $message)) {
+            return new Response(null, Response::HTTP_I_AM_A_TEAPOT);
+        }
+
+        return new Response(null, Response::HTTP_NO_CONTENT);
+    }
+
     #[Route('/my-info', name: 'my_info', priority: 10)]
     public function info(Request $request, TranslatorInterface $translator): Response
     {
@@ -36,7 +71,7 @@ class ApiController
         $response = new JsonResponse([
             $translator->trans('browser') => $ua,
             $translator->trans('ip') => $ip,
-            $translator->trans('lang') => $lang
+            $translator->trans('lang') => $lang,
         ]);
         $logDir = realpath($this->getVarDirPath().\DIRECTORY_SEPARATOR.'log');
         file_put_contents($logDir.\DIRECTORY_SEPARATOR.'my-info.log', $response->getContent().\PHP_EOL, \FILE_APPEND);
@@ -56,7 +91,7 @@ class ApiController
         return new JsonResponse([
             $translator->trans('sku') => $row['sku'],
             $translator->trans('name') => $row['name'],
-            $translator->trans('description') => $row['description']
+            $translator->trans('description') => $row['description'],
         ]);
     }
 
