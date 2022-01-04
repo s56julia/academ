@@ -18,7 +18,6 @@ class ApiControllerListener
 {
     public function onKernelRequest(RequestEvent $event)
     {
-        return;
         $request = $event->getRequest();
         $controller = $request->attributes->get('_controller');
         if (!str_starts_with($controller, 'App\Controller\ApiController')) {
