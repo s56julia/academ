@@ -66,6 +66,36 @@ services:
         decorates: Symfony\Component\Routing\Generator\UrlGeneratorInterface
         arguments: ['@App\Routing\UrlGeneratorDecorator.inner']
 
+    # Command
+    App\Command\ConsoleCommandChaining\ConsoleCommandNotChaining:
+        class: App\Command\ConsoleCommandChaining\ConsoleCommandNotChaining
+        tags:
+            - { name: 'console.command' }
+
+    App\Command\ConsoleCommandChaining\CommandFooHello:
+        class: App\Command\ConsoleCommandChaining\CommandFooHello
+        tags:
+            - { name: 'console.command' }
+
+    App\Command\ConsoleCommandChaining\CommandBar:
+        class: App\Command\ConsoleCommandChaining\CommandBar
+        tags:
+            - { name: 'console.command' }
+
+    App\Command\ConsoleCommandChaining\ConsoleCommandChaining:
+        decorates: App\Command\ConsoleCommandChaining\CommandFooHello
+        class: App\Command\ConsoleCommandChaining\ConsoleCommandChaining
+        arguments: [ '@App\Command\ConsoleCommandChaining\ConsoleCommandChaining.inner', [ 'bar:hi' ] ]
+        tags:
+            - { name: 'console.command' }
+
+    App\Command\ConsoleCommandChaining\DecoratedChildcommand:
+        decorates: App\Command\ConsoleCommandChaining\CommandBar
+        class: App\Command\ConsoleCommandChaining\DecoratedChildcommand
+        arguments: [ '@App\Command\ConsoleCommandChaining\DecoratedChildcommand.inner', 'foo:hello' ]
+        tags:
+            - { name: 'console.command' }
+
 when@test:
     services:
         test.user_password_hasher:
