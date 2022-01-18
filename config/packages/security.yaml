@@ -24,6 +24,19 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        login:
+            pattern: ^/(%app_locales%)/api/login
+            stateless: true
+            json_login:
+                check_path: /%locale%/api/login_check
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+        api:
+            pattern:   ^/(%app_locales%)/api
+            stateless: true
+            jwt: ~
+
         main:
             # this firewall applies to all URLs
             pattern: ^/
@@ -65,6 +78,9 @@ security:
     access_control:
         # this is a catch-all for the admin area
         # additional security lives in the controllers
+        - { path: '^/(%app_locales%)/api/login', roles: PUBLIC_ACCESS }
+        - { path: '^/(%app_locales%)/api/$', roles: PUBLIC_ACCESS }
+        - { path: '^/(%app_locales%)/api', roles: IS_AUTHENTICATED_FULLY }
         - { path: '^/(%app_locales%)/admin', roles: ROLE_ADMIN }
 
     role_hierarchy:

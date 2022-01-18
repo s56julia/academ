@@ -79,7 +79,7 @@ class ApiController
         return $response;
     }
 
-    #[Route('/{sku}', name: 'view')]
+    #[Route('/{sku}', name: 'view', methods: ['GET'])]
     public function view(string $sku, TranslatorInterface $translator): Response
     {
         $products = $this->getProductsData();

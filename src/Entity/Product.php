@@ -30,9 +30,14 @@ class Product
 
     /**
      * @ORM\ManyToOne(targetEntity=ProductImage::class, inversedBy="products")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $image;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="products")
+     */
+    private $author;
 
     public function getId(): ?int
     {
@@ -71,6 +76,18 @@ class Product
     public function setImage(?ProductImage $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }
