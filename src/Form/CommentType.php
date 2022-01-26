@@ -14,7 +14,10 @@ namespace App\Form;
 use App\Entity\Comment;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -45,6 +48,14 @@ class CommentType extends AbstractType
                 'help' => 'help.comment_content',
             ])
         ;
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $comment = $event->getData();
+            $form = $event->getForm();
+
+            if ($comment && null === $comment->getAuthor()) {
+                $form->add('name', TextType::class);
+            }
+        });
     }
 
     /**
