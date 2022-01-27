@@ -21,6 +21,22 @@
         {# Render any global form error (e.g. when a constraint on a public getter method failed) #}
         {{ form_errors(form) }}
 
+        {% if form.name is defined %}
+            <p>
+                <a class="btn btn-success" href="{{ path('security_login') }}">
+                    <i class="fa fa-sign-in" aria-hidden="true"></i> {{ 'action.sign_in'|trans }}
+                </a>
+            </p>
+
+            <div class="form-group {% if not form.name.vars.valid %}has-error{% endif %}">
+                {{ form_label(form.name, 'label.name') }}
+
+                {{ form_errors(form.name) }}
+
+                {{ form_widget(form.name, {attr: {rows: 10}}) }}
+            </div>
+        {% endif %}
+
         <div class="form-group {% if not form.content.vars.valid %}has-error{% endif %}">
             {{ form_label(form.content, 'label.content', {label_attr: {class: 'sr-only'}}) }}
 

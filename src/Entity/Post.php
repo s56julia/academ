@@ -14,13 +14,13 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
+use Knp\DoctrineBehaviors\Model\Translatable\TranslatableTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
  * @ORM\Table(name="symfony_demo_post")
- * @UniqueEntity(fields={"slug"}, errorPath="title", message="post.slug_unique")
  *
  * Defines the properties of the Post entity to represent the blog posts.
  *
@@ -33,8 +33,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @author Javier Eguiluz <javier.eguiluz@gmail.com>
  * @author Yonel Ceruto <yonelceruto@gmail.com>
  */
-class Post
+class Post implements TranslatableInterface
 {
+    use TranslatableTrait;
+
     /**
      * @var int
      *
@@ -43,39 +45,6 @@ class Post
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank
-     */
-    private $title;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string")
-     */
-    private $slug;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="post.blank_summary")
-     * @Assert\Length(max=255)
-     */
-    private $summary;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="text")
-     * @Assert\NotBlank(message="post.blank_content")
-     * @Assert\Length(min=10, minMessage="post.too_short_content")
-     */
-    private $content;
 
     /**
      * @var \DateTime
@@ -129,32 +98,42 @@ class Post
 
     public function getTitle(): ?string
     {
-        return $this->title;
+        return $this->proxyCurrentLocaleTranslation('getTitle');
     }
 
     public function setTitle(?string $title): void
     {
-        $this->title = $title;
+        $this->proxyCurrentLocaleTranslation('setTitle', [$title]);
     }
 
     public function getSlug(): ?string
     {
-        return $this->slug;
+        return $this->proxyCurrentLocaleTranslation('getSlug');
     }
 
     public function setSlug(string $slug): void
     {
-        $this->slug = $slug;
+        $this->proxyCurrentLocaleTranslation('setSlug', [$slug]);
     }
 
     public function getContent(): ?string
     {
-        return $this->content;
+        return $this->proxyCurrentLocaleTranslation('getContent');
     }
 
     public function setContent(?string $content): void
     {
-        $this->content = $content;
+        $this->proxyCurrentLocaleTranslation('setContent', [$content]);
+    }
+
+    public function getSummary(): ?string
+    {
+        return $this->proxyCurrentLocaleTranslation('getSummary');
+    }
+
+    public function setSummary(?string $summary): void
+    {
+        $this->proxyCurrentLocaleTranslation('setSummary', [$summary]);
     }
 
     public function getPublishedAt(): \DateTime
@@ -193,16 +172,6 @@ class Post
     public function removeComment(Comment $comment): void
     {
         $this->comments->removeElement($comment);
-    }
-
-    public function getSummary(): ?string
-    {
-        return $this->summary;
-    }
-
-    public function setSummary(?string $summary): void
-    {
-        $this->summary = $summary;
     }
 
     public function addTag(Tag ...$tags): void

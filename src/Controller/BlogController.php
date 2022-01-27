@@ -13,11 +13,14 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Post;
+use App\Entity\PostTranslation;
 use App\Event\CommentCreatedEvent;
 use App\Form\CommentType;
 use App\Repository\PostRepository;
 use App\Repository\TagRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -65,6 +68,7 @@ class BlogController extends AbstractController
 
     /**
      * @Route("/posts/{slug}", methods="GET", name="blog_post")
+     * @Entity("post", expr="repository.findBySlug(slug, _locale)")
      *
      * NOTE: The $post controller argument is automatically injected by Symfony
      * after performing a database query looking for a Post with the 'slug'
@@ -85,7 +89,6 @@ class BlogController extends AbstractController
 
     /**
      * @Route("/comment/{postSlug}/new", methods="POST", name="comment_new")
-     * @IsGranted("IS_AUTHENTICATED_FULLY")
      * @ParamConverter("post", options={"mapping": {"postSlug": "slug"}})
      *
      * NOTE: The ParamConverter mapping is required because the route parameter
@@ -95,7 +98,10 @@ class BlogController extends AbstractController
     public function commentNew(Request $request, Post $post, EventDispatcherInterface $eventDispatcher): Response
     {
         $comment = new Comment();
-        $comment->setAuthor($this->getUser());
+        $user = $this->getUser();
+        if($user) {
+            $comment->setAuthor($user);
+        }
         $post->addComment($comment);
 
         $form = $this->createForm(CommentType::class, $comment);
@@ -132,7 +138,12 @@ class BlogController extends AbstractController
      */
     public function commentForm(Post $post): Response
     {
-        $form = $this->createForm(CommentType::class);
+        $comment = new Comment();
+        $user = $this->getUser();
+        if($user) {
+            $comment->setAuthor($user);
+        }
+        $form = $this->createForm(CommentType::class, $comment);
 
         return $this->render('blog/_comment_form.html.twig', [
             'post' => $post,

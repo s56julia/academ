@@ -22,6 +22,10 @@
         <source>label.content</source>
         <target>Содержание</target>
       </trans-unit>
+      <trans-unit id="9436708004f723d02431155c0fc3f20be9b02022" resname="label.name">
+        <source>label.name</source>
+        <target>Имя</target>
+      </trans-unit>
       <trans-unit id="cc43a781180eece11d85cbbc772ea28d2d8f3426" resname="label.current_password">
         <source>label.current_password</source>
         <target>Текущий пароль</target>

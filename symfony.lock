@@ -1,4 +1,7 @@
 {
+    "brick/math": {
+        "version": "0.9.3"
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.2"
     },
@@ -121,23 +124,44 @@
     "jms/translation-bundle": {
         "version": "1.6.0"
     },
+    "knplabs/doctrine-behaviors": {
+        "version": "2.5.0"
+    },
     "laminas/laminas-code": {
         "version": "3.4.1"
     },
-    "laminas/laminas-eventmanager": {
-        "version": "3.3.1"
+    "lcobucci/clock": {
+        "version": "2.1.0"
     },
-    "laminas/laminas-zendframework-bridge": {
-        "version": "1.2.0"
+    "lcobucci/jwt": {
+        "version": "3.4.6"
     },
     "league/uri-parser": {
         "version": "1.4.1"
+    },
+    "lexik/jwt-authentication-bundle": {
+        "version": "2.14",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "5b2157bcd5778166a5696e42f552ad36529a07a6"
+        },
+        "files": [
+            "config/packages/lexik_jwt_authentication.yaml"
+        ]
     },
     "masterminds/html5": {
         "version": "2.7.4"
     },
     "monolog/monolog": {
         "version": "2.2.0"
+    },
+    "namshi/jose": {
+        "version": "7.2.3"
+    },
+    "nette/utils": {
+        "version": "v3.2.7"
     },
     "nikic/php-parser": {
         "version": "v4.10.5"
@@ -153,6 +177,12 @@
     },
     "psr/log": {
         "version": "1.1.4"
+    },
+    "ramsey/collection": {
+        "version": "1.2.2"
+    },
+    "ramsey/uuid": {
+        "version": "4.2.3"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
@@ -397,6 +427,9 @@
     },
     "symfony/polyfill-mbstring": {
         "version": "v1.23.0"
+    },
+    "symfony/polyfill-php56": {
+        "version": "v1.20.0"
     },
     "symfony/polyfill-php80": {
         "version": "v1.23.0"

@@ -35,6 +35,24 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
+    public function findBySlug(string $slug, string $locale): ?Post
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb->join('p.translations', 't')
+            ->where('t.slug = :slug')
+            ->andWhere(
+                $qb->expr()->orX(
+                    't.locale = :locale',
+                    't.locale = :defaultLocale'
+                )
+            )
+            ->setParameter('slug', $slug)
+            ->setParameter('locale', $locale)
+            ->setParameter('defaultLocale', 'en');
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
     public function findLatest(int $page = 1, Tag $tag = null): Paginator
     {
         $qb = $this->createQueryBuilder('p')

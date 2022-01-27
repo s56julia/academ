@@ -72,9 +72,19 @@ class Comment
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $author;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length (
+     *     max=255
+     * )
+     */
+    private $name;
 
     public function __construct()
     {
@@ -134,5 +144,21 @@ class Comment
     public function setPost(Post $post): void
     {
         $this->post = $post;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name): void
+    {
+        $this->name = $name;
     }
 }

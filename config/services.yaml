@@ -66,6 +66,14 @@ services:
         decorates: Symfony\Component\Routing\Generator\UrlGeneratorInterface
         arguments: ['@App\Routing\UrlGeneratorDecorator.inner']
 
+    App\Command\DataLoadCommand:
+        class: App\Command\DataLoadCommand
+        tags:
+            - { name: 'console.command' }
+
+    App\EntityGenerator\EntityGenerator:
+        class: App\EntityGenerator\EntityGenerator
+
 when@test:
     services:
         test.user_password_hasher:
