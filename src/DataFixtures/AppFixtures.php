@@ -89,7 +89,7 @@ class AppFixtures extends Fixture
 
                 $post->addComment($comment);
             }
-
+            $post->mergeNewTranslations();
             $manager->persist($post);
         }
 

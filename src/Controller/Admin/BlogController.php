@@ -86,6 +86,7 @@ class BlogController extends AbstractController
         // See https://symfony.com/doc/current/forms.html#processing-forms
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $post->mergeNewTranslations();
             $em->persist($post);
             $em->flush();
 
@@ -136,6 +137,7 @@ class BlogController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $post->mergeNewTranslations();
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash('success', 'post.updated_successfully');

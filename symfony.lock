@@ -1,4 +1,7 @@
 {
+    "brick/math": {
+        "version": "0.9.3"
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.2"
     },
@@ -121,6 +124,9 @@
     "jms/translation-bundle": {
         "version": "1.6.0"
     },
+    "knplabs/doctrine-behaviors": {
+        "version": "2.5.0"
+    },
     "laminas/laminas-code": {
         "version": "3.4.1"
     },
@@ -154,6 +160,9 @@
     "namshi/jose": {
         "version": "7.2.3"
     },
+    "nette/utils": {
+        "version": "v3.2.7"
+    },
     "nikic/php-parser": {
         "version": "v4.10.5"
     },
@@ -168,6 +177,12 @@
     },
     "psr/log": {
         "version": "1.1.4"
+    },
+    "ramsey/collection": {
+        "version": "1.2.2"
+    },
+    "ramsey/uuid": {
+        "version": "4.2.3"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
